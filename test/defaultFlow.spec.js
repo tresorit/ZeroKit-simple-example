@@ -22,6 +22,7 @@ const browserStackDevice = {
 };
 
 describe('Default flow', function(){
+  this.retries(3);
   for(let i = 0; i < browsersToTest.length; ++i){
     const b1 = browsersToTest[i];
     const b2 = browsersToTest[(i+1)%browsersToTest.length];
