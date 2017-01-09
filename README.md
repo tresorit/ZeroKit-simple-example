@@ -1,13 +1,14 @@
 [![Build Status](https://travis-ci.org/tresorit/ZeroKit-simple-example.svg?branch=master)](https://travis-ci.org/tresorit/ZeroKit-simple-example)
 # Welcome to ZeroKit!
-This repository shows you a very basic example of using ZeroKit for zero knowledge authentication 
-and end-to-end encryption.
+This repository is a template of a basic example application that shows you how to use ZeroKit for zero knowledge authentication 
+and end-to-end encryption in a very basic manner.
 ## Instructions
 1. Make sure you have a nodejs (>6.0.0) installed.
     - You can download the current version from [here](https://nodejs.org)
 2. Instantiate the application by running `node installer <tenantId> <adminKey> [hostId]`
-    - To get your credentials please email [Dave](mailto:dave@tresorit.com)(dave@tresorit.com)
-3. Start the example app server, by running `cd app && npm start`
+    - To get your credentials visit the [management portal](manage.tresorit.io), you can sign up for a free account there.
+3. The example app is now in the app subfolder, that you can optionally move wherever you like.
+3. Start the example app server, by running `npm start` in the app folder
 4. Navigate your browser (preferably chrome) to [http://localhost:3000](http://localhost:3000)
 5. Register a new user, sign in and try encrypting and decrypting something.
 
