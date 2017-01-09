@@ -1,0 +1,59 @@
+<html>
+<head>
+  <title>ZeroKit Simple Example - Decrypt</title>
+
+  <!-- Load some common tools & styles -->
+  <link rel="stylesheet" type="text/css" href="common.css">
+  <script src="utils.js"></script>
+
+  <!-- Load 0_kit SDK JS library -->
+  <script src="{{ZkitSdk.FrameOrigin}}/{{ZkitSdk.TenantRoot}}/static/v4/zkit-sdk.js"></script>
+</head>
+<body>
+<div id="userPanel">
+  <div id="userIdLoader">Loading user profile...</div>
+
+  <!-- Here, we'll show the logged in user's ID -->
+  <div id="userIdPanel" class="hidden">Logged in as <span id="userId" class="boldText">None</span></div>
+</div>
+
+<!-- We'll decrypt the text here -->
+<div id="decryptPanel" class="hidden">
+  <label for="encryptedText">Encrypted text:</label>
+  <textarea rows="4" id="encryptedText"></textarea><br />
+  <button onclick="decrypt(document.getElementById('encryptedText').value);">Decrypt</button>
+  <div id="decryptedText"></div>
+</div>
+
+<br><br><br>
+<a href="encrypt.html">Let's encrypt instead!</a>
+
+<script type="text/javascript">
+  // Initialize SDK
+  zkit_sdk.setup({{JSON.stringify(ZkitSdk.FrameOrigin)}}{{ZkitSdk.TenantRoot.length === 0 ? "" : ", \"/" + ZkitSdk.TenantRoot + '"'}});
+
+  // Check out who the logged in user is
+  zkit_sdk.whoAmI().then(
+    function (userId) {
+      document.getElementById("userId").innerHTML = userId;
+      hide("userIdLoader");
+      show("userIdPanel");
+      show('decryptPanel');
+    }
+  );
+
+  function decrypt(text) {
+    //Decrypt the copied cipherText
+    zkit_sdk.decrypt(text).then(
+      function (decrText) {
+        // Success
+        document.getElementById('decryptedText').innerHTML = decrText;
+      }, function (){
+        // Failure
+        document.getElementById('decryptedText').innerHTML = 'Couldn\'t decrypt';
+      }
+    );
+  }
+</script>
+</body>
+</html>

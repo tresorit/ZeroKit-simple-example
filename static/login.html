@@ -1,0 +1,67 @@
+<html>
+<head>
+  <!-- Load some common tools & styles-->
+  <link rel="stylesheet" type="text/css" href="common.css">
+  <script src="utils.js"></script>
+
+  <title>ZeroKit Simple Example - Login</title>
+
+  <!-- Load 0_kit SDK JS library -->
+  <script src="{{ZkitSdk.FrameOrigin}}/{{ZkitSdk.TenantRoot}}/static/v4/zkit-sdk.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="utils.js"></script>
+
+<div id="login">
+  <h1>Please sign in</h1>
+
+  <input type="text" id="username" placeholder="Username" />
+  <!-- Placeholder for password iFrame -->
+  <div id="zkitLogin"></div>
+
+  <!-- Login button -->
+  <button id="signin" onclick="login()"><b>SIGN IN</b></button>
+
+  <p id="gotoReg">Don't have a user yet? <a href="register.html">Sign up!</a></p>
+</div>
+
+<div id="loggedIn" class="hidden">
+  <p>Logged in as</p>
+  <p id="userId" class="boldText">None</p>
+  <p><a href="encrypt.html">Encrypt</a> or <a href="decrypt.html">Decrypt</a></p>
+</div>
+
+
+<!-- Login code -->
+<script type="text/javascript">
+  // Initialize SDK
+  zkit_sdk.setup({{JSON.stringify(ZkitSdk.FrameOrigin)}}{{ZkitSdk.TenantRoot.length === 0 ? "" : ", \"/" + ZkitSdk.TenantRoot + '"'}});
+
+  // Load login iframe into placeholder div tag
+  var zkit_login = zkit_sdk.getLoginIframe(document.getElementById('zkitLogin'));
+
+  // Start login process on button click
+  function login() {
+    var username = document.getElementById('username').value;
+    // We have to first query the id of the user from the application server,
+    // since the SDK doesn't know the username.
+    workshopServerCall('get-user-id', { alias: username },
+      function (res) {
+        // Log in on the SDK
+        return zkit_login.login(res.userId).then(function (userId) {
+          // Successful login
+          // Write user's ID on page
+          document.getElementById('userId').innerHTML = userId;
+
+          // Display logged in info
+          show('loggedIn');
+
+          // Hide the login form
+          hide('login');
+        });
+      }
+    );
+  }
+</script>
+</body>
+</html>

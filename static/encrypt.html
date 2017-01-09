@@ -1,0 +1,105 @@
+<html>
+<head>
+  <title>ZeroKit Simple Example - Encrypt</title>
+
+  <!-- Load some common tools & styles -->
+  <link rel="stylesheet" type="text/css" href="common.css">
+  <script src="utils.js"></script>
+
+  <!-- Load 0_kit SDK JS library -->
+  <script src="{{ZkitSdk.FrameOrigin}}/{{ZkitSdk.TenantRoot}}/static/v4/zkit-sdk.js"></script>
+</head>
+<body>
+<!-- Here, we'll show the logged in user's ID -->
+<div id="userPanel">
+  <div id="userIdLoader">Loading user profile...</div>
+  <div id="userIdPanel" class="hidden">Logged in as <span id="userId" class="boldText">None</span></div>
+</div>
+
+<!-- We'll start by asking the user to create a tresor -->
+<div id="createTresorPanel" class="hidden">
+  <h1>Let's encrypt!</h1>
+  <h3>Step 1: Create a tresor.</h3>
+  <p>A tresor is a keychain that that you can share with other users.</p>
+  <button onclick="createTresor();">Create Tresor</button> <div id="tresorCreated"></div>
+</div>
+<br>
+
+<!-- We'll encrypt a line of text here. -->
+<div id="encryptPanel" class="hidden">
+  <h3>Step 2: Enter a line of text to encrypt</h3>
+  <label for="tresorId">Tresor ID: </label>
+  <input type="text" id="tresorId"/>
+  <label for="plainText">Text to encrypt: </label>
+  <textarea rows="4" id="plainText"></textarea><br />
+  <button onclick="encrypt(document.getElementById('tresorId').value, document.getElementById('plainText').value);">Encrypt</button>
+</div>
+
+<!-- Show encrypted text here -->
+<div id="decryptPanel" class="hidden">
+  <label for="encryptedText"> Encrypted text: </label>
+  <textarea rows="4" id="encryptedText"></textarea><br />
+  <button onclick="verifyDecrypt(document.getElementById('encryptedText').value);">Test decrypt</button>
+  <div id="decryptedText"></div>
+</div>
+
+<!-- This is where we'll share a tresor with another user -->
+<div id="sharePanel" class="hidden">
+  <label for="shareWith">Share the Tresor with somebody else?</label>
+  <input type="text" placeholder="Enter UserID" id="shareWith"/><br />
+  <button onclick="shareTresor(document.getElementById('tresorId').value, document.getElementById('shareWith').value);">Share Tresor</button>
+  <div id="shared" class="hidden">Shared</div>
+</div>
+
+
+<script type="text/javascript">
+  // Initialize SDK
+  zkit_sdk.setup({{JSON.stringify(ZkitSdk.FrameOrigin)}}{{ZkitSdk.TenantRoot.length === 0 ? "" : ", \"/" + ZkitSdk.TenantRoot + '"'}});
+
+  // Check out who the logged in user is
+  zkit_sdk.whoAmI().then(function(userId) {
+    document.getElementById("userId").innerHTML = userId;
+    hide("userIdLoader");
+    show("userIdPanel");
+
+    show('createTresorPanel');
+  });
+
+  // Create a new tresor
+  function createTresor() {
+    zkit_sdk.createTresor().then(function(tresorId) {
+      document.getElementById('tresorId').value = tresorId;
+      show('encryptPanel');
+      return workshopServerCall('new-tresor', { id: tresorId });
+    });
+  }
+
+  // Encrypt a line of text
+  function encrypt(tresorId, text) {
+    zkit_sdk.encrypt(tresorId, text).then(function(encryptedText) {
+      document.getElementById('encryptedText').value = encryptedText;
+      show('decryptPanel');
+      show('sharePanel');
+    });
+  }
+
+  function verifyDecrypt(text) {
+    zkit_sdk.decrypt(text).then(function(decrText) {
+      // Should be validated/escaped before display
+      document.getElementById('decryptedText').innerHTML = decrText;
+    });
+  }
+
+  function shareTresor(tresorId, userId) {
+    zkit_sdk.shareTresor(tresorId, userId).then(function(operationId) {
+      // For demo purposes, we'll do a server-side auto-approval for the share operation.
+      // In your own app, your server should double-check if the share operation aligns with your
+      // own ACLs / permission logic.
+      workshopServerCall('shared-tresor', { id: operationId }, function () {
+        show('shared');
+      });
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- '6.0'
+- '6'
+- '7'
+install: true
+script:
+- node installer.js $TENANT_ID $ADMIN_KEY $HOST_ID
+- cd app
+- npm start &
+- npm install
+- npm test
+addons:
+  browserstack:
+    username:
+      secure: "PMwGokN43Y9PQ1LZu/EamAq0yC19jwsMdP77RMUlVFRZ+wQ7p6J1hmgxG+vateEgJlgbwEyzz5dCcRBmUGKzCZbFdkQkRQJ356OhJj5WpmqCnxFeID875WpBTQZwPvnbwwI57KZhzd6x/N1lB7kyWtzKnCC8bjb5RmRokdfDb0xS4vLTOZvg5Yu0FqNuKz5ZbFOKwZ1dq8zwUXavPW/r95e+SXhKRSIMfdWKySsrS/JGlB4MZMnza+/w/A9LDMvImt860lCU/lGe0NVWZbaauWUZN0VAvGDO/IjdhlWt3h9BTgqQGjisdIyLN67ZWO8Os85KnHnMdvFVysqUdF3XxzI5/RTRl5p0exp+wClx38NNPsY98y9gH7p1YSMS5sZhnLre/xet1BQiA+gF0NJIxIyZOqGuir/lWmCt3gvcSap2f1LoulOPbl0ie/Mh+AV2jz9tKEnuWKWCphA6XHTGPmbt/tgHVwwGouJQmkYw9QOwPwlbdOEpqsNA8d9NxzczC2RvUoQ4+gLDCagbKvbrFcXRNo3WQ0TlsBFmkKCl3ZQfl1F1fTsTedcCC/0Y/aDtl3inT6Xi5VvlirK7SWmoXJcPIbm8/5Jz5XgYJPI9bSZHj8a5XLLSqMxg/jeLZTjV1A3ny2JePNl4nxajmtD6XB03dD/tib7f+vBpeiElZg4="
+    access_key:
+      secure: "xITHPyqvxK1okZJWU4INOJ7mUu+YRDq0A968R7yHN55+iyd2TbUx4DQnrWUEvdKOCTtlOU4FRiiCHmKmVrpLRX3RWal2jtLNGR5zCrrEyhlBcXrII+PjUlSPoa0MBQFx/rOwLSB87cSc2Usby+YGyD+RLQ8Qgw9hXveyxD+qi3wOsJrIeBfsEW+NaaibTDwFM4Fi5E4FeMctnKigCxipZrvLcJIzgdJednzqRKRekmGFnYxVhQc5GAfvdelei4xJkLyb379w2aLbIjPNKoV6xJxSU5oVjKIQN0kpNWDFURtAiUGVSgbrHuAyMX27aCHtjhEjrcA7oGgcihiAeELu5xBPANgZa+IaYGu90FLS6qtfhmweI99MK2O0pTREPVQdLNBspov3shGW9Fjjx3n3SeU0AgYgSa6pTJwaKHt2AnqVnwHXtZi71YBzI2zNdQ/Qu3qFHTqu/AWuiDH8Yl3RHk+BBycathCpZyYlofvd1uuDekjL0zWmkPX94yNAChGNx2KZhnYkcKWREUvatqW8KylgHLIXaioLYD8Mnr4ffM0nTzpM9hbaaxglg3PbS050Ad1GVCsnrm6VjF5xyvlatJCgSjwIXL+X2NshbHYRHzPKDtX2zWCmxk2XbllH1AxVi1/k2h/9Nf0C8bKjsdOfKnRd1nTgM6RlkAhHlyZhYS4="

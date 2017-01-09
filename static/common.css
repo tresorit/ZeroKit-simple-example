@@ -1,0 +1,25 @@
+.hidden {
+    display: none;
+}
+
+.boldText {
+    font-weight: bold;
+}
+
+body {
+    text-align: center;
+}
+
+iframe {
+    border: none;
+}
+
+label {
+    display: block;
+    margin: 0.5em;
+    font-weight: bold;
+}
+
+input, textarea, button {
+    margin: 0.5em
+}

@@ -1,0 +1,59 @@
+<html>
+<head>
+  <!-- Load some common tools & styles -->
+  <link rel="stylesheet" type="text/css" href="common.css">
+  <script src="utils.js"></script>
+
+  <title>ZeroKit Simple Example - Register</title>
+
+  <!-- Load 0_kit SDK JS library -->
+  <script src="{{ZkitSdk.FrameOrigin}}/{{ZkitSdk.TenantRoot}}/static/v4/zkit-sdk.js"></script>
+</head>
+<body>
+<h1>Sign up</h1>
+
+<!-- Username field -->
+<input type="text" id="alias" placeholder="Username" /><br><br>
+
+<div id="regIframe">
+  <!-- The 0_kit SDK will load the iframe with the password input here -->
+</div>
+
+<!-- Button to start registration process -->
+<button onclick="register(document.getElementById('alias').value);">Register</button>
+
+<!-- This panel will show up after successful registration -->
+<div id="nextStep" class="hidden">
+  <p>Registration successful.</p>
+  <p><a href="login.html">You can log in now.</a>.</p>
+</div>
+
+<script type="text/javascript">
+  // Initialize SDK
+  zkit_sdk.setup({{JSON.stringify(ZkitSdk.FrameOrigin)}}{{ZkitSdk.TenantRoot.length === 0 ? "" : ", \"/" + ZkitSdk.TenantRoot + '"'}});
+
+  // Get registration iframe
+  var zkit_register = zkit_sdk.getRegistrationIframe(document.getElementById('regIframe'));
+
+  // Register user
+  function register(alias) {
+    // Step 1: reserve a unique user ID for the registration
+    // This is needed, since the sdk doesn't need to know about the username (a possibly sensitive info).
+    workshopServerCall('init-user-reg', { alias: alias }, function (userIdResp) {
+      // Step 2: register user through the sdk
+      return zkit_register.register(userIdResp.userId, userIdResp.regSessionId)
+        .then(function (succRegResp) {
+          // Step 3: finish registration transaction
+          // (and auto-approve user for demo purposes)
+          workshopServerCall("finished-registration", {
+            userId: userIdResp.userId,
+            regValidationVerifier: succRegResp.RegValidationVerifier
+          }, function () {
+            show('nextStep');
+          });
+        });
+    });
+  }
+</script>
+</body>
+</html>
