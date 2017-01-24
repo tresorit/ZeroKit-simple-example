@@ -49,4 +49,4 @@ jspm_packages
 /app
 
 /.idea
-localdb
+localdb/
