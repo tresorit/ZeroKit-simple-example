@@ -35,7 +35,7 @@
   // Check out who the logged in user is
   zkit_sdk.whoAmI().then(
     function (userId) {
-      document.getElementById("userId").innerHTML = userId;
+      setText("userId", userId);
       hide("userIdLoader");
       show("userIdPanel");
       show('decryptPanel');
@@ -47,10 +47,10 @@
     zkit_sdk.decrypt(text).then(
       function (decrText) {
         // Success
-        document.getElementById('decryptedText').innerHTML = decrText;
+        setText('decryptedText', decrText);
       }, function (){
         // Failure
-        document.getElementById('decryptedText').innerHTML = 'Couldn\'t decrypt';
+        setText('decryptedText', 'Couldn\'t decrypt');
       }
     );
   }

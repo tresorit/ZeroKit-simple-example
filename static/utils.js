@@ -61,3 +61,12 @@ window.workshopServerCall = function (urlPart, obj, resolve, reject){
   xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   xhr.send(JSON.stringify(obj));
 };
+
+/**
+ * Safely sets the text of the element matched by the id.
+ */
+window.setText = function (id, text) {
+  var ele = document.getElementById(id);
+  while(ele.firstChild) ele.removeChild(ele.firstChild);
+  ele.appendChild(document.createTextNode(text));
+};

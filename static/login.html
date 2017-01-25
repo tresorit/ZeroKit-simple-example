@@ -51,7 +51,7 @@
         return zkit_login.login(res.userId).then(function (userId) {
           // Successful login
           // Write user's ID on page
-          document.getElementById('userId').innerHTML = userId;
+          setText('userId', userId);
 
           // Display logged in info
           show('loggedIn');
