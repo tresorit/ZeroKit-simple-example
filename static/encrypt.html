@@ -7,7 +7,7 @@
   <script src="utils.js"></script>
 
   <!-- Load 0_kit SDK JS library -->
-  <script src="{{ZkitSdk.FrameOrigin}}/{{ZkitSdk.TenantRoot}}/static/v4/zkit-sdk.js"></script>
+  <script src="{{ZkitSdk.FrameOrigin}}{{ZkitSdk.TenantRoot}}/static/v4/zkit-sdk.js"></script>
 </head>
 <body>
 <!-- Here, we'll show the logged in user's ID -->
@@ -54,7 +54,7 @@
 
 <script type="text/javascript">
   // Initialize SDK
-  zkit_sdk.setup({{JSON.stringify(ZkitSdk.FrameOrigin)}}{{ZkitSdk.TenantRoot.length === 0 ? "" : ", \"/" + ZkitSdk.TenantRoot + '"'}});
+  zkit_sdk.setup({{JSON.stringify(ZkitSdk.FrameOrigin)}}{{ZkitSdk.TenantRoot.length === 0 ? "" : ", \"" + ZkitSdk.TenantRoot + '"'}});
 
   // Check out who the logged in user is
   zkit_sdk.whoAmI().then(function(userId) {

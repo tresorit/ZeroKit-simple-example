@@ -97,7 +97,7 @@ function main(tenantId, adminKey, hostId) {
       'AdminKey': adminKey,
       'AdminUserId': `admin@${tenantId}.tresorit.io`,
       'ApiBase': `https://${hostId}.api.tresorit.io`,
-      'TenantRoot': hostId !== tenantId ? 'tenant-' + tenantId : '',
+      'TenantRoot': hostId !== tenantId ? '/tenant-' + tenantId : '',
       'FrameOrigin': `https://${hostId}.api.tresorit.io` // Can be different from ApiBase when testing
     }
   });

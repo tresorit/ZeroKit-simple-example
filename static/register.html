@@ -7,7 +7,7 @@
   <title>ZeroKit Simple Example - Register</title>
 
   <!-- Load 0_kit SDK JS library -->
-  <script src="{{ZkitSdk.FrameOrigin}}/{{ZkitSdk.TenantRoot}}/static/v4/zkit-sdk.js"></script>
+  <script src="{{ZkitSdk.FrameOrigin}}{{ZkitSdk.TenantRoot}}/static/v4/zkit-sdk.js"></script>
 </head>
 <body>
 <h1>Sign up</h1>
@@ -30,7 +30,7 @@
 
 <script type="text/javascript">
   // Initialize SDK
-  zkit_sdk.setup({{JSON.stringify(ZkitSdk.FrameOrigin)}}{{ZkitSdk.TenantRoot.length === 0 ? "" : ", \"/" + ZkitSdk.TenantRoot + '"'}});
+  zkit_sdk.setup({{JSON.stringify(ZkitSdk.FrameOrigin)}}{{ZkitSdk.TenantRoot.length === 0 ? "" : ", \"" + ZkitSdk.TenantRoot + '"'}});
 
   // Get registration iframe
   var zkit_register = zkit_sdk.getRegistrationIframe(document.getElementById('regIframe'));

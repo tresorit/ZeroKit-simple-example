@@ -7,7 +7,7 @@
   <title>ZeroKit Simple Example - Login</title>
 
   <!-- Load 0_kit SDK JS library -->
-  <script src="{{ZkitSdk.FrameOrigin}}/{{ZkitSdk.TenantRoot}}/static/v4/zkit-sdk.js"></script>
+  <script src="{{ZkitSdk.FrameOrigin}}{{ZkitSdk.TenantRoot}}/static/v4/zkit-sdk.js"></script>
 </head>
 <body>
 <script type="text/javascript" src="utils.js"></script>
@@ -35,7 +35,7 @@
 <!-- Login code -->
 <script type="text/javascript">
   // Initialize SDK
-  zkit_sdk.setup({{JSON.stringify(ZkitSdk.FrameOrigin)}}{{ZkitSdk.TenantRoot.length === 0 ? "" : ", \"/" + ZkitSdk.TenantRoot + '"'}});
+  zkit_sdk.setup({{JSON.stringify(ZkitSdk.FrameOrigin)}}{{ZkitSdk.TenantRoot.length === 0 ? '' : ', "' + ZkitSdk.TenantRoot + '"'}});
 
   // Load login iframe into placeholder div tag
   var zkit_login = zkit_sdk.getLoginIframe(document.getElementById('zkitLogin'));
