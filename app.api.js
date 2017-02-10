@@ -7,7 +7,7 @@ const rp = require('request-promise-native');
 const AdminKey = '{{ZkitSdk.AdminKey}}';
 const AdminUId = '{{ZkitSdk.AdminUserId}}';
 const ApiBase = '{{ZkitSdk.ApiBase}}/';
-const TenantRoot = '{{ZkitSdk.TenantRoot.length === 0 ? "" : ZkitSdk.TenantRoot + "/"}}';
+const TenantRoot = '{{ZkitSdk.TenantRoot.length === 0 ? "" : ZkitSdk.TenantRoot.substr(1) + "/"}}';
 
 /*
     Called by init-user-reg, this initiates the user registration flow
