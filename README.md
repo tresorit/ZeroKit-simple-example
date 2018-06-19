@@ -1,3 +1,5 @@
+**Notice:** This project is discontinued and no longer maintained nor supported by Tresorit. This repository only exists for archival purposes.
+***
 [![Build Status](https://travis-ci.org/tresorit/ZeroKit-simple-example.svg?branch=master)](https://travis-ci.org/tresorit/ZeroKit-simple-example)
 # Welcome to ZeroKit!
 This repository is a template of a basic example application that shows you how to use ZeroKit for zero knowledge authentication 
